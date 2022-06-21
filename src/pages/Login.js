@@ -42,32 +42,31 @@ class Login extends React.Component {
     }
     return (
       <div data-testid="page-login">
-        {loading ? <Loading /> : (
-
-          <form className="form">
-            <br />
-            <label htmlFor="name">
-              Nome:
+        {loading ? <Loading />
+          : (
+            <form className="form">
               <br />
-              <input
-                data-testid="login-name-input"
-                type="text"
-                name="inputName"
-                value={ inputName }
-                onChange={ this.onInputChange }
-              />
-            </label>
-            <button
-              type="submit"
-              data-testid="login-submit-button"
-              disabled={ isDisableBtnLogin }
-              onClick={ this.handleClick }
-            >
-              Entrar
-            </button>
-          </form>
-
-        )}
+              <label htmlFor="name">
+                Nome:
+                <br />
+                <input
+                  data-testid="login-name-input"
+                  type="text"
+                  name="inputName"
+                  value={ inputName }
+                  onChange={ this.onInputChange }
+                />
+              </label>
+              <button
+                type="submit"
+                data-testid="login-submit-button"
+                disabled={ isDisableBtnLogin }
+                onClick={ this.handleClick }
+              >
+                Entrar
+              </button>
+            </form>
+          )}
       </div>
     );
   }
