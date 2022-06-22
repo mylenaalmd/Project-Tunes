@@ -28,7 +28,7 @@ class Album extends React.Component {
 
   render() {
     const { choiceAlbum } = this.state;
-    console.log(choiceAlbum.length);
+
     return (
       <div>
         <div data-testid="page-album">
@@ -43,8 +43,6 @@ class Album extends React.Component {
         <div>
           <ul>
             {
-            //   choiceAlbum.length > 0
-            // && (
               choiceAlbum.filter((item) => item.trackId)
                 .map((e, index) => (
                   <li key={ index }>
@@ -56,7 +54,6 @@ class Album extends React.Component {
                     />
                   </li>
                 ))
-            // )
             }
           </ul>
         </div>
