@@ -11,7 +11,8 @@ class MusicCard extends React.Component {
   }
 
   // componentDidMount = () => {
-  //   this.checkedButton();
+  //   const getSongs = await getFavoriteSongs();
+  //   this.setState({isChecked: this.handleChecked(getSongs)});
   // }
 
   checkedButton = async () => {
@@ -19,11 +20,21 @@ class MusicCard extends React.Component {
     this.setState({ loading: true });
     const favorited = await addSong(favoriteSongs);
     this.setState({ favoriteSongs: favorited });
-    this.setState({
-      loading: false,
-      isChecked: true,
-    });
+    this.setState({ loading: false, isChecked: true });
   }
+
+  // handleCheckbox = async ({ target }) => {
+  //   const { musicsList } = this.props;
+  //   const { checked } = target;
+  //   const musicFilter = musicsList.filter((item) => item.trackName === target.name)[0];
+  //   if (checked) {
+  //     await addSong(musicFilter);
+  //     this.setState({ loading: false, checkedBox: checked });
+  //     return;
+  //   }
+  //   await removeSong(musicFilter);
+  //   this.setState({ loading: false, checkedBox: checked });
+  // }
 
   handleChecked = () => {
     const { trackId, trackName, previewUrl } = this.props;
@@ -34,6 +45,11 @@ class MusicCard extends React.Component {
         url: previewUrl,
       } });
     this.checkedButton();
+  }
+
+  checkBox = (e) => {
+    const { trackId } = this.props;
+    return e.some((item) => item.trackId === trackId);
   }
 
   render() {
