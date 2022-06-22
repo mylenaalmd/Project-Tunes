@@ -35,7 +35,7 @@ class Search extends React.Component {
 
   render() {
     const { inputBand, loading, artist, albuns } = this.state;
-    console.log(albuns);
+    // console.log(albuns);
 
     return (
       <div>
