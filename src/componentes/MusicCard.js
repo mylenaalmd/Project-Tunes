@@ -7,7 +7,6 @@ class MusicCard extends React.Component {
   state = {
     loading: false,
     isChecked: false,
-    favoriteSongs: {},
   }
 
   async componentDidMount() {
@@ -17,48 +16,21 @@ class MusicCard extends React.Component {
 
   checkedButton = async ({ target }) => {
     const { trackId, trackName, previewUrl } = this.props;
-    this.setState({
-      favoriteSongs: {
-        id: trackId,
-        name: trackName,
-        url: previewUrl,
-      } });
-    // this.checkedButton();
-
-    const { favoriteSongs } = this.state;
     const { checked } = target;
+    const favoriteSongs = {
+      id: trackId,
+      name: trackName,
+      url: previewUrl,
+    };
     this.setState({ loading: true });
 
-    await addSong(favoriteSongs);
-    this.setState({ isChecked: checked });
-
-    await removeSong(favoriteSongs);
+    if (checked) {
+      await addSong(favoriteSongs);
+    } else {
+      await removeSong(favoriteSongs);
+    }
     this.setState({ loading: false, isChecked: checked });
   }
-
-  // handleCheckbox = async ({ target }) => {
-  //   const { musicsList } = this.props;
-  //   const { checked } = target;
-  //   const musicFilter = musicsList.filter((item) => item.trackName === target.name)[0];
-  //   if (checked) {
-  //     await addSong(musicFilter);
-  //     this.setState({ loading: false, checkedBox: checked });
-  //     return;
-  //   }
-  //   await removeSong(musicFilter);
-  //   this.setState({ loading: false, checkedBox: checked });
-  // }
-
-  // handleChecked = () => {
-  //   const { trackId, trackName, previewUrl } = this.props;
-  //   this.setState({
-  //     favoriteSongs: {
-  //       id: trackId,
-  //       name: trackName,
-  //       url: previewUrl,
-  //     } });
-  //   this.checkedButton();
-  // }
 
   checkBox = (e) => {
     const { trackId } = this.props;
@@ -86,15 +58,15 @@ class MusicCard extends React.Component {
               </audio>
             </p>
             <section>
-              <label htmlFor="favorit">
+              <label htmlFor={ trackId }>
                 Favorita
                 <input
                   type="checkbox"
                   data-testid={ `checkbox-music-${trackId}` }
-                  name="checked"
-                  id="favorit"
+                  name="favorite"
+                  id={ trackId }
                   checked={ isChecked }
-                  onClick={ this.checkedButton }
+                  onChange={ this.checkedButton }
                 />
               </label>
             </section>
