@@ -46,11 +46,11 @@ class ProfileEdit extends React.Component {
 
     return (
       <div>
+        <Header />
+        <div data-testid="page-profile-edit" />
         {loading ? (<Loading />
         ) : (
           <div>
-            <Header />
-            <div data-testid="page-profile-edit" />
             <section>
               <form className="form">
                 <br />

@@ -21,11 +21,11 @@ class Profile extends React.Component {
 
     return (
       <div>
+        <Header />
+        <div data-testid="page-profile" />
         {loading ? (<Loading />
         ) : (
           <div>
-            <Header />
-            <div data-testid="page-profile" />
             <section>
               <h2>{infoLogin.name}</h2>
               <h3>{infoLogin.email}</h3>
