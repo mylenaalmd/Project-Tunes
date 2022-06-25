@@ -2,12 +2,13 @@ import React from 'react';
 import Header from '../componentes/Header';
 import MusicCard from '../componentes/MusicCard';
 import Loading from '../componentes/Loading';
-import { getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Favorites extends React.Component {
   state = {
     loading: true,
     songs: [],
+    // isChecked: true,
   }
 
   async componentDidMount() {
@@ -16,17 +17,10 @@ class Favorites extends React.Component {
       songs: listSongsLocalStorage });
   }
 
-  listFavorite = ({ target }) => {
-    const { id } = target;
+  removeSongsFavorite = (music) => {
     const { songs } = this.state;
-    const musicas = [...songs];
-    this.setState({ loading: true }, async () => {
-      const musicId = musicas.find((item) => item.trackId === Number(id));
-      await removeSong(musicId);
-      const musicasFavoritas = await getFavoriteSongs();
-      this.setState({ songs: musicasFavoritas,
-        loading: false });
-    });
+    const musicasFavoritas = songs.filter((item) => item.trackId !== music.trackId);
+    this.setState({ songs: musicasFavoritas });
   }
 
   render() {
@@ -44,11 +38,11 @@ class Favorites extends React.Component {
               {songs.map((song, index) => (
                 <MusicCard
                   key={ index }
-                  trackId={ song.id }
-                  trackName={ song.name }
+                  trackId={ song.trackId }
+                  trackName={ song.trackName }
                   previewUrl={ song.url }
-                  song
-                  handleChange={ this.listFavorite }
+                  songs={ songs }
+                  removeSongsFavorite={ this.removeSongsFavorite }
                 />
               ))}
             </section>

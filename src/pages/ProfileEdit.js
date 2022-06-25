@@ -32,8 +32,8 @@ class ProfileEdit extends React.Component {
     this.setState({ loading: false, newUser: true });
   }
 
-  handleChange = ({ target }) => {
-    this.setState({ [value]: target.value });
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
   }
 
   render() {
@@ -52,7 +52,7 @@ class ProfileEdit extends React.Component {
         ) : (
           <div>
             <section>
-              <form className="form">
+              <form onSubmit={ this.handleClick }>
                 <br />
                 <label htmlFor="name">
                   Nome:
@@ -104,7 +104,6 @@ class ProfileEdit extends React.Component {
                 <button
                   type="submit"
                   data-testid="edit-button-save"
-                  onClick={ this.handleClick }
                 >
                   Salvar
                 </button>
