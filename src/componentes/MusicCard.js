@@ -85,6 +85,13 @@ MusicCard.propTypes = {
   trackId: PropTypes.number.isRequired,
   previewUrl: PropTypes.string.isRequired,
   removeSongsFavorite: PropTypes.func.isRequired,
+  songs: PropTypes.arrayOf(
+    PropTypes.shape({
+      trackName: PropTypes.string,
+      url: PropTypes.string,
+      trackId: PropTypes.number,
+    }).isRequired,
+  ).isRequired,
 };
 
 export default MusicCard;
